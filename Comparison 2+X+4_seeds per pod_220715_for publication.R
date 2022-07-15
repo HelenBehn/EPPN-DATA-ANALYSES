@@ -106,7 +106,7 @@ comp_2X4ord$Genotype <- factor(comp_2X4ord$Genotype,
 library(datasets)
 
 # analysis of variance
-anova <- aov(plant_height ~ Genotype, data = comp_2X4ord)
+anova <- aov(seeds_per_pod ~ Genotype, data = comp_2X4ord)
 summary(anova)
 
 # Tukey's test
@@ -119,7 +119,7 @@ print(cld)
 
 # table with factors and 3rd quantile
 Tk <- group_by(comp_2X4ord, Genotype) %>%
-  summarise(mean = round(mean(plant_height), digits = 1), quant = round(quantile(plant_height, probs = 0.75), digits = 1)) %>%
+  summarise(mean = round(mean(seeds_per_pod), digits = 1), quant = round(quantile(seeds_per_pod, probs = 0.75), digits = 1)) %>%
   arrange(desc(mean)) #WICHTIG: arrange(desc(mean)) muss hier rein!!!
 
 # extracting the compact letter display and adding to the Tk table
@@ -169,17 +169,10 @@ ANOVA_Tukey_2X4 <- Tk %>%
     Genotype == "N6C2J2.N7C1J1" ~ "allohex hybrid"))
 view(ANOVA_Tukey_2X4)
 
-#Regular updates of R siftware
-#load package
-install.packages("installr")
-library(installr)
-#update
-updateR()
-
 #boxplot
-ggplot(comp_2X4ord, aes(Genotype, plant_height, fill = Generation, color = Generation)) + 
+ggplot(comp_2X4ord, aes(Genotype, seeds_per_pod, fill = Generation, color = Generation)) + 
   geom_boxplot() +
-  labs(x="Genotype", y="Plant height (cm)") +
+  labs(x="Genotype", y="Seeds/pod") +
   geom_text(data = ANOVA_Tukey_2X4, aes(x = Genotype, y = quant, label = cld), color = "black", size = 2.5, vjust = 0.3, hjust = 3) +
   coord_flip() +
   theme(axis.title = element_text(size = 14),
