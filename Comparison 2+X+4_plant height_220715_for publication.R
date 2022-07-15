@@ -8,7 +8,6 @@ library(viridis)
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
-library(ggplot2)
 library(ggpubr)
 library(datasets)
 library(multcompView)
@@ -45,6 +44,7 @@ head(comp_2X4)
 View(comp_2X4)
 
 #create column giving generation###############################################
+#N5C2J1_PH42 removed!!!######################################################## 
 comp_2X4 <- comp_2X4 %>%
   mutate(Generation = case_when(
   Genotype == "N1" ~ "P1",
@@ -68,7 +68,6 @@ comp_2X4 <- comp_2X4 %>%
   Genotype == "N1C1J1_PH36" ~ "novel allohex",
   Genotype == "N1C1J1_PH39" ~ "novel allohex",
   Genotype == "N1C2J1_PH40" ~ "novel allohex",
-  Genotype == "N5C2J1_PH42" ~ "novel allohex",
   Genotype == "N6C2J2_PH44" ~ "novel allohex",
   Genotype == "N4C2J1_PH45" ~ "novel allohex",
   Genotype == "N6C2J2_PH48" ~ "novel allohex",
@@ -85,6 +84,7 @@ comp_2X4 <- comp_2X4 %>%
 
 
 # Reorder factor levels in comp_2X4
+#N5C2J1_PH42 removed!!!##
 comp_2X4ord <- comp_2X4                             
 comp_2X4ord$Genotype <- factor(comp_2X4ord$Genotype,     
                              levels = c("N1C1J1.N1C2J1", "N1C1J1.N5C2J2", "N1C1J1. N6C2J2", 
@@ -95,18 +95,15 @@ comp_2X4ord$Genotype <- factor(comp_2X4ord$Genotype,
                                "N1C2J1_PH26", "N1C2J1_PH40", 
                                "N4C2J1_PH45","N4C2J1_PH27",
                                "N6C2J2_PH24", "N6C2J2_PH35", "N6C2J2_PH44", "N6C2J2_PH48", 
-                               "N5C2J1_PH42", "N5C2J1_PH22", 
+                               "N5C2J1_PH22", 
                                "N5C2J2_PH30", "N5C2J2_PH23", 
                                "N7C1J1",
                                
                                "J1", "J2", "C1", "C2", "N1", "N4", "N5", "N6", "N7"))
 
-# Boxplot with CLD nach Rosane Rech##########################################################
+# ANOVA, Tukey & Boxplot with CLD according to Rosane Rech##########################################################
 # loading the appropriate libraries
 library(datasets)
-library(ggplot2)
-library(multcompView)
-library(dplyr)
 
 # analysis of variance
 anova <- aov(plant_height ~ Genotype, data = comp_2X4ord)
@@ -122,13 +119,18 @@ print(cld)
 
 # table with factors and 3rd quantile
 Tk <- group_by(comp_2X4ord, Genotype) %>%
-  summarise(mean=mean(plant_height), quant = quantile(plant_height, probs = 0.75)) 
+  summarise(mean = round(mean(plant_height), digits = 1), quant = round(quantile(plant_height, probs = 0.75), digits = 1)) %>%
+  arrange(desc(mean)) #WICHTIG: arrange(desc(mean)) muss hier rein!!!
 
 # extracting the compact letter display and adding to the Tk table
 cld <- as.data.frame.list(cld$Genotype)
 Tk$cld <- cld$Letters
+print(Tk) # print dient der Überprüfung: Mittelwerte und Letter code 
+# in der gleichen Reihenfolge angeordnet?
+
 
 #create column giving generation###############################################
+#N5C2J1_PH42 removed!!!########################################################
 ANOVA_Tukey_2X4 <- Tk %>%
   mutate(Generation = case_when(
     Genotype == "N1" ~ "P1",
@@ -152,7 +154,6 @@ ANOVA_Tukey_2X4 <- Tk %>%
     Genotype == "N1C1J1_PH36" ~ "novel allohex",
     Genotype == "N1C1J1_PH39" ~ "novel allohex",
     Genotype == "N1C2J1_PH40" ~ "novel allohex",
-    Genotype == "N5C2J1_PH42" ~ "novel allohex",
     Genotype == "N6C2J2_PH44" ~ "novel allohex",
     Genotype == "N4C2J1_PH45" ~ "novel allohex",
     Genotype == "N6C2J2_PH48" ~ "novel allohex",
@@ -168,13 +169,38 @@ ANOVA_Tukey_2X4 <- Tk %>%
     Genotype == "N6C2J2.N7C1J1" ~ "allohex hybrid"))
 view(ANOVA_Tukey_2X4)
 
+#Regular updates of R siftware
+#load package
+install.packages("installr")
+library(installr)
+#update
+updateR()
 
-# boxplot plant_height##############################################################
+#colours##########################################################################
+## We need to install R-package 'rcartocolor' 
+install.packages("rcartocolor")
+library(rcartocolor) ## warning: unknown palette
+## diplay all colors
+display_carto_all()
+
+#yarrr
+install.packages("yarrr")
+library(yarrr)
+
+## install and load package 
+install.packages("colorspace")
+library(colorspace)
+
+# Install
+install.packages("wesanderson")
+# Load
+library(wesanderson)
+
+# boxplot plant_height mit rcartocolor##############################################################
 #Input-objekte:
 view(ANOVA_Tukey_2X4)
 view(comp_2X4ord)
 
-#ohne facet_wrap ###############
 ggplot(comp_2X4ord, aes(Genotype, plant_height, color = Generation)) + 
   geom_boxplot() +
   labs(x="Genotype", y="plant_height (cm)") +
@@ -187,20 +213,38 @@ ggplot(comp_2X4ord, aes(Genotype, plant_height, color = Generation)) +
         axis.title.y = element_text(size = 10),
         axis.text.x = element_text(size = 6),
         axis.text.y = element_text(size = 6)) +
-  scale_color_viridis(discrete = TRUE, option = "D") 
+  scale_fill_brewer(palette="Earth") #geht nicht, unknown palette
 
 
-#mit facet_wrap##############
-# Relevel group factor (Generation)
-comp_2X4ord$Generation <- factor(comp_2X4ord$Generation,                 
-                              levels = c("P1", "P2", "P3", "novel allohex", "allohex hybrid"))
-ANOVA_Tukey_2X4$Generation <- factor(ANOVA_Tukey_2X4$Generation,                 
-                                 levels = c("P1", "P2", "P3", "novel allohex", "allohex hybrid"))
+# boxplot plant_height mit brewer##############################################################
+#Input-objekte:
+view(ANOVA_Tukey_2X4)
+view(comp_2X4ord)
+
+p <- ggplot(comp_2X4ord, aes(Genotype, plant_height, color = Generation)) + 
+        geom_boxplot() +
+        labs(x="Genotype", y="plant_height (cm)") +
+        geom_text(data = ANOVA_Tukey_2X4, aes(x = Genotype, y = quant, label = cld), color = "black", size = 2, vjust = 0.3, hjust = 7) +
+        coord_flip() +
+        theme(axis.title = element_text(size = 14),
+              legend.text = element_text(size = 8),
+              legend.title = element_text(size = 10),
+              axis.title.x = element_text(size = 10),
+              axis.title.y = element_text(size = 10),
+              axis.text.x = element_text(size = 6),
+              axis.text.y = element_text(size = 6)) 
+p + scale_color_brewer(palette="Set5")
+
+#boxplot mit yarrr
+piratepal("all")
+piratepal("bugs", plot.result = TRUE, trans = 0.1)
+bugs <- piratepal(palette = "bugs", trans = 0.1)
+
 
 ggplot(comp_2X4ord, aes(Genotype, plant_height, color = Generation)) + 
   geom_boxplot() +
   labs(x="Genotype", y="plant_height (cm)") +
-  geom_text(data = ANOVA_Tukey_2X4, aes(x = Genotype, y = quant, label = cld), size = 2, vjust = 0.3, hjust = 3.5) +
+  geom_text(data = ANOVA_Tukey_2X4, aes(x = Genotype, y = quant, label = cld), color = "black", size = 2, vjust = 0.3, hjust = 7) +
   coord_flip() +
   theme(axis.title = element_text(size = 14),
         legend.text = element_text(size = 8),
@@ -209,25 +253,35 @@ ggplot(comp_2X4ord, aes(Genotype, plant_height, color = Generation)) +
         axis.title.y = element_text(size = 10),
         axis.text.x = element_text(size = 6),
         axis.text.y = element_text(size = 6)) +
-facet_wrap(~ Generation, nrow = 5, scales = "free_y") 
+  scale_fill_brewer(palette="bugs") ## geht nur mit Pirateplot!!!
+
+# boxplot plant_height mit viridis##############################################################
+#Input-objekte:
+view(ANOVA_Tukey_2X4)
+view(comp_2X4ord)
+
+ggplot(comp_2X4ord, aes(Genotype, plant_height, fill = Generation, color = Generation)) + 
+    geom_boxplot() +
+    labs(x="Genotype", y="plant_height (cm)") +
+    geom_text(data = ANOVA_Tukey_2X4, aes(x = Genotype, y = quant, label = cld), color = "black", size = 2, vjust = 0.3, hjust = 7) +
+    coord_flip() +
+    theme(axis.title = element_text(size = 14),
+          legend.text = element_text(size = 8),
+          legend.title = element_text(size = 10),
+          axis.title.x = element_text(size = 10),
+          axis.title.y = element_text(size = 10),
+          axis.text.x = element_text(size = 6),
+          axis.text.y = element_text(size = 6)) +
+  scale_fill_viridis(discrete = TRUE, option = "D", direction = -1, 
+                     breaks=c("P1", "P2", "P3", "novel allohex", "allohex hybrid"),
+                     labels=c("P1", "P2", "P3", "novel allohexaploids", "allohexaploid hybrids")) ##reorder legend labels!
 
 
 
-
-# test test test farben ##################################################################
-ggplot(data, aes(x, y, fill = x)) +     # Manually specifying colors
-  geom_bar(stat = "identity") +
-  scale_fill_manual(values = c("A" = "#353436",
-                               "B" = "#1b98e0",
-                               "C" = "red",
-                               "D" = "red",
-                               "E" = "green"))
-
-
-ggplot(comp_2X4ord, aes(Genotype, plant_height, fill = Genotype)) + 
+ggplot(comp_2X4ord, aes(Genotype, plant_height, fill = Generation, color = Generation)) + 
   geom_boxplot() +
   labs(x="Genotype", y="plant_height (cm)") +
-  geom_text(data = ANOVA_Tukey_2X4, aes(x = Genotype, y = quant, label = cld), size = 2, vjust = 0.3, hjust = 3.5) +
+  geom_text(data = ANOVA_Tukey_2X4, aes(x = Genotype, y = quant, label = cld), color = "black", size = 2.5, vjust = 0.3, hjust = 7) +
   coord_flip() +
   theme(axis.title = element_text(size = 14),
         legend.text = element_text(size = 8),
@@ -236,24 +290,9 @@ ggplot(comp_2X4ord, aes(Genotype, plant_height, fill = Genotype)) +
         axis.title.y = element_text(size = 10),
         axis.text.x = element_text(size = 6),
         axis.text.y = element_text(size = 6)) +
-  scale_fill_manual(values = c("J1"="deepskyblue", 
-                               "J2" = "darkblue", 
-                               "C1" = "#FFCC33", 
-                               "C2" = "#FFFF99", 
-                               "N1" = "#660000", 
-                               "N4" = "#CC0000", 
-                               "N5" = "#FF3333", 
-                               "N6" = "#FF3399", 
-                               "N7" = "#FF99CC")) +
-  facet_wrap(~ Generation, nrow = 5, scales = "free_y") 
+  scale_color_viridis(discrete = TRUE, option = "D", direction = 1, guide = "none", alpha = 1) +  #legend removed by guide = "none" 
+  scale_fill_viridis(discrete = TRUE, option = "D", direction = 1, alpha = 0.5,
+                     breaks=c("P1", "P2", "P3", "novel allohex", "allohex hybrid"),
+                     labels=c("P1", "P2", "P3", "novel allohexaploids", "allohexaploid hybrids")) ##reorder legend labels!
 
-"N1C1J1.N1C2J1", "N1C1J1.N5C2J2", "N1C1J1. N6C2J2", 
-"N5C2J2.N7C1J1", "N5C2J2.N6C2J2", "N5C2J2.N5C2J2", 
-"N6C2J2.N4C2J1", "N6C2J2.N7C1J1", "N6C2J2.O1J3",
-"N1C1J1_PH25", "N1C1J1_PH36","N1C1J1_PH31", "N1C1J1_PH39", 
-"N1C2J1_PH26", "N1C2J1_PH40", 
-"N4C2J1_PH45","N4C2J1_PH27",
-"N6C2J2_PH24", "N6C2J2_PH35", "N6C2J2_PH44", "N6C2J2_PH48", 
-"N5C2J1_PH42", "N5C2J1_PH22", 
-"N5C2J2_PH30", "N5C2J2_PH23", 
-"N7C1J1"
+
