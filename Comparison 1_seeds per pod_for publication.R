@@ -1,4 +1,4 @@
-# Comparison 1X: Resynth. B.napus
+# Comparison 1X: seeds_per_pod in Resynth. B.napus
 
 #install packages 
 install.packages("multcompView")
@@ -67,7 +67,7 @@ view(comp_1X)
 # Boxplot with CLD nach Rosane Rech##########################################################
 
 # analysis of variance
-anova <- aov(plant_height ~ Genotype, data = comp_1X)
+anova <- aov(seeds_per_pod ~ Genotype, data = comp_1X)
 summary(anova)
 
 # Tukey's test
@@ -80,7 +80,7 @@ print(cld)
 
 # table with factors and 3rd quantile
 Tk <- group_by(comp_1X, Genotype) %>%
-  summarise(mean = round(mean(plant_height, na.rm = TRUE), digits = 1), quant = round(quantile(plant_height, probs = 0.75, na.rm = TRUE), digits = 1)) %>%
+  summarise(mean = round(mean(seeds_per_pod, na.rm = TRUE), digits = 1), quant = round(quantile(seeds_per_pod, probs = 0.75, na.rm = TRUE), digits = 1)) %>%
   arrange(desc(mean)) #WICHTIG: arrange(desc(mean)) muss hier rein!!!
 
 # extracting the compact letter display and adding to the Tk table
@@ -113,10 +113,10 @@ comp_1X$Genotype <- factor(comp_1X$Genotype,
 ANOVA_Tukey_1X$Genotype <- factor(ANOVA_Tukey_1X$Genotype,     
                                     levels = c("N1", "N4", "N5", "N6", "N7", "R2O4", "R1O2", "R1O3", "O1", "O4", "R1", "R2"))
 
-#boxplot ## plant_height ###
-ggplot(comp_1X, aes(Genotype, plant_height, fill = Generation, color = Generation)) + 
+#boxplot ## seeds_per_pod ###
+ggplot(comp_1X, aes(Genotype, seeds_per_pod, fill = Generation, color = Generation)) + 
   geom_boxplot() +
-  labs(x="Genotype", y="Plant height (cm)") +
+  labs(x="Genotype", y="Number of seeds/pod") +
   geom_text(data = ANOVA_Tukey_1X, aes(x = Genotype, y = quant, label = cld), color = "black", size = 2.5, vjust = 0.3, hjust = 3) +
   coord_flip() +
   theme(axis.title = element_text(size = 14),
