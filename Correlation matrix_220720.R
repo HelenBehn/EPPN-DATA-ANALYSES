@@ -17,7 +17,6 @@ library(tibble)
 # Daher Rohdatentabelle direkt von dort laden. 
 getwd()
 DATA <- read_csv("EPPN raw data complete 220419.csv")
-View(DATA)
 
 #drop columns
 DATA = DATA[,-c(1:2, 4:5)]
@@ -121,12 +120,14 @@ view(DATA_renamed)
 # cor function
 str(DATA)
 cor(DATA[,2:33], DATA[,2:33], method = "pearson") #geht nur für numerische Variablen
+cor(DATA_renamed[,3:34], DATA_renamed[,3:34], method = "pearson")
 
 #corr.test
 install.packages("psych")
 library(psych)
 
 corr.test(DATA[,2:33], DATA[,2:33], method = "pearson")
+Corr_coeff_p <- corr.test(DATA_renamed[,3:34], DATA_renamed[,3:34], method = "pearson")
 
 # correlation matrix of complete data set by genotype
 #drop first column
@@ -156,78 +157,72 @@ colnames(DATA)
 #plot.corr_coef auch aus metan package
 plot.corr_coef(DATA_renamed[ , 3:34])
 
-#Nach KHstats (https://www.khstats.com/blog/corr-plots/corr-plots/#just-the-code)
-install.packages("Hmisc")
-library(Hmisc)
 
-str(DATA)
-typeof(DATA)
 
-# get r, p and n von KH ##geht nicht
-rcorr()
+#NEU#############################################################################
+# ggcorrplot: Visualization of a correlation matrix using ggplot2 nach STHDA
+# (http://www.sthda.com/english/wiki/ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2)
 
-#alternative #calculate correlation coefficient (r), P-value and number of observations 
-corrDATA <- corr.test(DATA[,3:34], DATA[,3:34], method = "pearson")
-#check: Does corr.test drop missing pairs?
-print(corrDATA)
-head(corrDATA)
-str(corrDATA)
-typeof(corrDATA)
+#ggcorrplot can be installed from CRAN as follow:
+install.packages("ggcorrplot")
 
-#turn into df
-Corr_r <- data.frame(corrDATA$r)
-view(Corr_r)
+#Or, install the latest version from GitHub:
+if(!require(devtools)) install.packages("devtools")
+devtools::install_github("kassambara/ggcorrplot")
 
-print(print(corrDATA$p))
-Corr_p <- data.frame(corrDATA$p)
-view(Corr_p)
+#Loading:
+library(ggcorrplot)
 
-Corr_n <- data.frame(corrDATA$n)
-view(Corr_n)
+# Compute a correlation matrix
+corr_matrix <- round(cor(DATA_renamed[ , 3:34]), 1)
+head(corr_matrix[, 1:6])
+print(corr_matrix) #warum Werte NA?
 
-#Let’s turn each matrix into a data frame and look at the top six rows with head and kable.
-data.frame(corrDATA$r) %>% head(n=3) %>% kable()
-data.frame(corrDATA$p) %>% head(n=3) %>% kable()
-data.frame(corrDATA$n) %>% head(n=3) %>% kable()
+# cor function with different arguments # still NAs
+cor(DATA_renamed[ , 3:34], y = NULL, use = "everything",
+    method = c("pearson", "kendall", "spearman"))
 
-typeof(corrDATA)
-#write function
-cors <- function(df) {
-  M <- Hmisc::rcorr(as.matrix(df))
-# turn all three matrices (r, n, and P into a data frame)
-  Mdf <- map(M, ~data.frame(.x))
-# return the three data frames in a list
-  return(Mdf)
-}
+# Compute a matrix of correlation p-values
+corr_matrix_p <- cor_pmat(DATA_renamed[ , 3:34])
+head(corr_matrix_p[, 1:4])
 
-#use function #### geht nicht weil liste
-cors(DATA) %>% first() %>% head() %>% kable()
-#unlist object
-str(corrDATA)
-corrMATRIX <- matrix(unlist(corrDATA), ncol = 32, nrow = 20483)
-#use function #### geht nicht weil liste
-cors(corrMATRIX) %>% first() %>% head() %>% kable()
+# Visualize the correlation matrix
+# method = "square" (default)
+ggcorrplot(corr_matrix)
 
-formatted_cors <- function(df){
-  cors(df) %>%
-    map(~rownames_to_column(.x, var="measure1")) %>%
-    map(~pivot_longer(.x, -measure1, "measure2")) %>%
-    bind_rows(.id = "id") %>%
-    pivot_wider(names_from = id, values_from = value) %>%
-    rename(p = P) %>%
-    mutate(sig_p = ifelse(p < .05, T, F),
-           p_if_sig = ifelse(sig_p, p, NA),
-           r_if_sig = ifelse(sig_p, r, NA)) 
-}
+# method = "circle"
+ggcorrplot(corr_matrix, method = "circle")
 
-formatted_cors(mtcars) %>%
-  ggplot(aes(measure1, measure2, fill=r, label=round(r_if_sig,2))) +
-  geom_tile() +
-  labs(x = NULL, y = NULL, fill = "Pearson's\nCorrelation", title="Correlations in Mtcars",
-       subtitle="Only significant Pearson's correlation coefficients shown") +
-  scale_fill_gradient2(mid="#FBFEF9",low="#0C6291",high="#A63446", limits=c(-1,1)) +
-  geom_text() +
-  theme_classic() +
-  scale_x_discrete(expand=c(0,0)) +
-  scale_y_discrete(expand=c(0,0)) +
-  theme(text=element_text(family="Roboto"))
+# Types of correlogram layout
+# Get the lower triangle
+ggcorrplot(corr_matrix, 
+           type = "lower",
+           outline.col = "white")
+
+# Argument colors # ggcorrplot BRAUCHT MATRIX ODER DF!!!
+ggcorrplot(corr_matrix, 
+           type = "lower",
+           outline.col = "white",
+           ggtheme = ggplot2::theme_gray,
+           colors = c("#6D9EC1", "white", "#E46726"))
+
+# Add correlation coefficients
+# argument lab = TRUE
+ggcorrplot(corr_matrix, 
+           type = "lower",
+           lab = TRUE)
+
+# Add correlation significance level
+# Argument p.mat, barring the no significant coefficient
+ggcorrplot(corr_matrix_p, 
+           type = "lower", 
+           p.mat = corr_matrix_p)
+
+# Add correlation coefficients and leave non-significant values blank
+# argument lab = TRUE
+ggcorrplot(corr_matrix_p, 
+           p.mat = corr_matrix_p, 
+           type = "lower", 
+           insig = "blank",
+           lab = TRUE)
+
