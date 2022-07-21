@@ -209,3 +209,65 @@ plot.corr_coef(DATA_renamed[ , 3:34])
 
 
 
+########################################################################
+# nochmal mit corrplot (https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html)
+
+library(corrplot)
+
+Corr_mat1 <- cor(DATA_renamed[ , 3:34]) #viele NAs in Ergebnis-Matrix
+print(Corr_mat1)
+
+# use = "pairwise.complete.obs", weil fehlende Werte zu NAs führen 
+Corr_mat2 <- cor(x = as.matrix(DATA_renamed[ , 3:34]), method = "pearson", use = "pairwise.complete.obs") 
+print(Corr_mat2)
+
+# visualize with corrplot
+corrplot(Corr_mat2, method = 'number')
+
+#get p-value matrix and confidence intervals matrix by cor.mtest() which returns a list containing:
+    # 1. p is the p-values matrix.
+    # 2. lowCI is the lower bound of confidence interval matrix.
+    # 3. uppCI is the lower bound of confidence interval matrix.
+P_mat_corr <- cor.mtest(DATA_renamed[ , 3:34], conf.level = 0.95)
+
+
+## add significant level stars 
+corrplot(Corr_mat2, #correlation matrix
+         p.mat = P_mat_corr$p, # Quelle der P-Werte 
+         tl.pos = 'd', 
+         insig = 'blank', 
+         sig.level = c(0.001, 0.01, 0.05),
+         pch.cex = 0.9, 
+         pch.col = 'grey20')
+
+## add significant level stars
+corrplot(Corr_mat2, 
+         p.mat = P_mat_corr$p, 
+         method = 'color', 
+         diag = FALSE, 
+         type = 'lower',
+         sig.level = c(0.001, 0.01, 0.05), 
+         pch.cex = 0.9,
+         insig = 'blank', 
+         pch.col = 'grey20')
+
+## leave blank on non-significant coefficient
+## add all correlation coefficients
+corrplot(Corr_mat2, 
+         p.mat = P_mat_corr$p, 
+         method = 'color', 
+         type = 'lower', 
+         insig='blank',
+         diag = FALSE)$corrPos -> p1
+text(p1$x, p1$y, round(p1$corr, 2))
+
+## leave blank on non-significant coefficient
+## add all correlation coefficients
+corrplot(Corr_mat2, 
+         p.mat = P_mat_corr$p, 
+         method = 'circle', 
+         type = 'lower', 
+         insig='blank',
+         order = 'AOE', 
+         diag = FALSE)$corrPos -> p1
+text(p1$x, p1$y, round(p1$corr, 2))
