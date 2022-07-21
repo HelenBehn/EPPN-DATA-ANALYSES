@@ -226,3 +226,17 @@ ggcorrplot(corr_matrix_p,
            insig = "blank",
            lab = TRUE)
 
+#NEU##########################################################################
+#nach STHDA mit ggplot2######################################################
+
+cormat <- round(cor(DATA_renamed[ , 3:34]),2)
+head(cormat)
+
+#The package reshape is required to melt the correlation matrix :
+library(reshape2)
+melted_cormat <- melt(cormat)
+head(melted_cormat)
+
+#The function geom_tile()[ggplot2 package] is used to visualize the correlation matrix :
+ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) + 
+  geom_tile()
