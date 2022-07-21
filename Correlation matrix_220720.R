@@ -30,9 +30,9 @@ DATA <- DATA %>%
     Genotype == "O1" ~ "B. oleracea",
     Genotype == "O4" ~ "B. oleracea",
     
-    Genotype == "R2O4" ~ "Resynth. B. napus",
-    Genotype == "R1O3" ~ "Resynth. B. napus",
-    Genotype == "R1O2" ~ "Resynth. B. napus",
+    Genotype == "R204" ~ "Resynth. B. napus", #ACHTUNG: in Rohdatentabelle "0" statt "O"
+    Genotype == "R103" ~ "Resynth. B. napus",
+    Genotype == "R102" ~ "Resynth. B. napus",
     Genotype == "N1" ~ "Natural B. napus",
     Genotype == "N4" ~ "Natural B. napus",
     Genotype == "N5" ~ "Natural B. napus",
@@ -77,9 +77,10 @@ DATA <- DATA %>%
     ))
 
 #Reorder traits
-#Accession nach vorne
+#1. Accession nach vorne
 DATA = DATA[, c(1, 34, 2:33)]
-#Group traits as growth, development and fertility traits
+View(DATA)
+#2. Group traits as growth, development and fertility traits
 DATA = DATA[, c(1:4, 18:29, 33:34, 10:17, 5:9, 30:32)]
 View(DATA)
 
@@ -145,98 +146,66 @@ DATA %>%
   group_by(Genotype) %>%
   do(data.frame(ggpairs(DATA[,2:33]))) #geht so nicht
 
+#Subsetting ###
+typeof(DATA_renamed$Accession)
+DATA_renamed$Accession <- as.factor(DATA_renamed$Accession)
+DATA_renamed$Genotype <- as.factor(DATA_renamed$Genotype)
+str(DATA_renamed)
+
+#subsetting
+data_new1 <- data[data$x1 == "A", ]  
+
+Nov_Allohex <- DATA_renamed[DATA_renamed$Accession == "novel allohexaploid", ]#created mysterious NA rows
+View(Nov_Allohex)
+
+#SUBSETTING######################################################################
+# so geht's ohne NA bug
+nov_allohex <- DATA_renamed[which(DATA_renamed$Accession == "novel allohexaploid"),]
+View(nov_allohex)
+
+allohex_hybrids <- DATA_renamed[which(DATA_renamed$Accession == "allohexaploid hybrid"),]
+View(allohex_hybrids)
+
+Res_B_napus <- DATA_renamed[which(DATA_renamed$Accession == "Resynth. B. napus"),]
+View(Res_B_napus)
+
+Natural_B_napus <- DATA_renamed[which(DATA_renamed$Accession == "Natural B. napus"),]
+View(Natural_B_napus)
+
+B_rapa <- DATA_renamed[which(DATA_renamed$Accession == "B. rapa"),]
+View(B_rapa)
+
+B_oleracea <- DATA_renamed[which(DATA_renamed$Accession == "B. oleracea"),]
+View(B_oleracea)
+
+B_carinata <- DATA_renamed[which(DATA_renamed$Accession == "B. carinata"),]
+View(B_carinata)
+
+B_juncea <- DATA_renamed[which(DATA_renamed$Accession == "B. juncea"),]
+View(B_juncea)
+
+JC_hybrid <- DATA_renamed[which(DATA_renamed$Accession == "JC hybrid"),]
+View(JC_hybrid)
+
+
 #Nach The Outlier (https://www.youtube.com/watch?v=2yLpEeO0QNc)
 install.packages("metan")
 library(metan)
 
-bivar.corr.EPPN <- corr_coef(DATA[ , 2:33])
-plot(bivar.corr.EPPN)
+bivar.corr.EPPN <- corr_coef(DATA_renamed[ , 3:34])
+plot(bivar.corr.EPPN,
+     reorder = FALSE,)
 
-colnames(DATA)
+plot(bivar.corr.EPPN,
+     reorder = FALSE,
+     insig = 'blank')
+
+plot.corr_coef(bivar.corr.EPPN,
+               reorder = FALSE,
+               insig = 'blank')
 
 #plot.corr_coef auch aus metan package
 plot.corr_coef(DATA_renamed[ , 3:34])
 
 
 
-#NEU#############################################################################
-# ggcorrplot: Visualization of a correlation matrix using ggplot2 nach STHDA
-# (http://www.sthda.com/english/wiki/ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2)
-
-#ggcorrplot can be installed from CRAN as follow:
-install.packages("ggcorrplot")
-
-#Or, install the latest version from GitHub:
-if(!require(devtools)) install.packages("devtools")
-devtools::install_github("kassambara/ggcorrplot")
-
-#Loading:
-library(ggcorrplot)
-
-# Compute a correlation matrix
-corr_matrix <- round(cor(DATA_renamed[ , 3:34]), 1)
-head(corr_matrix[, 1:6])
-print(corr_matrix) #warum Werte NA?
-
-# cor function with different arguments # still NAs
-cor(DATA_renamed[ , 3:34], y = NULL, use = "everything",
-    method = c("pearson", "kendall", "spearman"))
-
-# Compute a matrix of correlation p-values
-corr_matrix_p <- cor_pmat(DATA_renamed[ , 3:34])
-head(corr_matrix_p[, 1:4])
-
-# Visualize the correlation matrix
-# method = "square" (default)
-ggcorrplot(corr_matrix)
-
-# method = "circle"
-ggcorrplot(corr_matrix, method = "circle")
-
-# Types of correlogram layout
-# Get the lower triangle
-ggcorrplot(corr_matrix, 
-           type = "lower",
-           outline.col = "white")
-
-# Argument colors # ggcorrplot BRAUCHT MATRIX ODER DF!!!
-ggcorrplot(corr_matrix, 
-           type = "lower",
-           outline.col = "white",
-           ggtheme = ggplot2::theme_gray,
-           colors = c("#6D9EC1", "white", "#E46726"))
-
-# Add correlation coefficients
-# argument lab = TRUE
-ggcorrplot(corr_matrix, 
-           type = "lower",
-           lab = TRUE)
-
-# Add correlation significance level
-# Argument p.mat, barring the no significant coefficient
-ggcorrplot(corr_matrix_p, 
-           type = "lower", 
-           p.mat = corr_matrix_p)
-
-# Add correlation coefficients and leave non-significant values blank
-# argument lab = TRUE
-ggcorrplot(corr_matrix_p, 
-           p.mat = corr_matrix_p, 
-           type = "lower", 
-           insig = "blank",
-           lab = TRUE)
-
-#NEU##########################################################################
-#nach STHDA mit ggplot2######################################################
-
-cormat <- round(cor(DATA_renamed[ , 3:34]),2)
-head(cormat)
-
-#The package reshape is required to melt the correlation matrix :
-library(reshape2)
-melted_cormat <- melt(cormat)
-head(melted_cormat)
-
-#The function geom_tile()[ggplot2 package] is used to visualize the correlation matrix :
-ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) + 
-  geom_tile()
