@@ -271,3 +271,283 @@ corrplot(Corr_mat2,
          order = 'AOE', 
          diag = FALSE)$corrPos -> p1
 text(p1$x, p1$y, round(p1$corr, 2))
+
+## leave blank on non-significant coefficient
+## add all correlation coefficients
+library(corrplot)
+
+Corr_mat2 <- cor(x = as.matrix(DATA_renamed[ , 3:34]), method = "pearson", use = "pairwise.complete.obs") 
+print(Corr_mat2)
+
+P_mat_corr <- cor.mtest(DATA_renamed[ , 3:34], conf.level = 0.95)
+
+corrplot(Corr_mat2, 
+         p.mat = P_mat_corr$p,
+         method = 'circle', 
+         type = 'lower', 
+         insig='blank',
+         addCoef.col ='black', 
+         number.cex = 0.8, 
+         diag=FALSE)
+
+#gut!
+corrplot(Corr_mat2, 
+         p.mat = P_mat_corr$p,
+         method = 'color', 
+         type = 'lower',
+         sig.level = 0.05,
+         insig='blank',
+         addCoef.col ='black',
+         number.cex = 0.6,
+         tl.cex = 0.6,
+         cl.cex = 0.6,
+         tl.col = "black",
+         diag=FALSE)
+
+#change colour of text labels #nimmt er nicht, schade
+corrplot(Corr_mat2, 
+         p.mat = P_mat_corr$p,
+         method = 'color', 
+         type = 'lower',
+         sig.level = 0.05,
+         insig='blank',
+         addCoef.col ='black',
+         number.cex = 0.6,
+         tl.cex = 0.7,
+         cl.cex = 0.7,
+         tl.col = "black",
+         diag=TRUE,
+         tl.col = c(Plant_height = "black",
+                    Branch_number = "black",
+                    Pod_weight_plant = "black",
+                    Pod_number_branch = "black",
+                    Pods_per_plant = "black",
+                    Pods_per_branch = "black",
+                    Single_pod_weight = "black",
+                    First_flowers_DAS = "grey",
+                    Maximum_flower_pixels_DAS = "grey",
+                    Flowering_days_to_peak = "grey",
+                    Total_flowering_days = "grey",
+                    Pixel_number_at_peak_flowering = "grey",
+                    Sum_of_flower_pixels_to_peak = "grey",
+                    Total_pixel_days = "grey",
+                    Mean_pixels_to_peak_flowering = "grey",
+                    Start_of_shoot_extension_DAS = "grey",
+                    Mean_shoot_extension_rate =  "grey",
+                    Max_shoot_extension_rate = "grey",
+                    DAS_of_max_shoot_extension_rate = "grey",
+                    Days_to_90_percent_max_height = "grey", 
+                    Days_to_50_percent_max_height = "grey",
+                    Days_to_75_percent_max_height = "grey", 
+                    Growth_rate_50_percent_max = "grey",
+                    Growth_rate_75_percent_max = "grey",
+                    Maximum_plant_height = "grey", 
+                    DAS_of_max_plant_height = "grey",
+                    Extension_days_to_max = "grey",
+                    Seed_weight_10_pods_g = "black", 
+                    Seeds_per_pod = "black",
+                    Thousand_seed_weight_g = "black"))
+
+#################################################################################
+#FERTIGSTELLUNG #################################################################
+library(corrplot)
+
+#FINALE VERSION: Kompletter Datensatz
+
+Corr_mat2 <- cor(x = as.matrix(DATA_renamed[ , 3:34]), method = "pearson", use = "pairwise.complete.obs") 
+print(Corr_mat2)
+
+P_mat_corr <- cor.mtest(DATA_renamed[ , 3:34], conf.level = 0.95)
+
+corrplot(Corr_mat2, 
+         p.mat = P_mat_corr$p,
+         method = 'color', 
+         type = 'lower',
+         sig.level = 0.05,
+         insig='blank',
+         addCoef.col ='black',
+         number.cex = 0.6,
+         tl.cex = 0.7,
+         cl.cex = 0.7,
+         tl.col = "black",
+         diag=TRUE)
+
+# nov_allohex
+Corr_nov_allohex <- cor(x = as.matrix(nov_allohex[ , 3:34]), method = "pearson", use = "pairwise.complete.obs") 
+print(Corr_nov_allohex)
+
+P_nov_allohex <- cor.mtest(nov_allohex[ , 3:34], conf.level = 0.95)
+
+corrplot(Corr_nov_allohex, 
+         p.mat = P_nov_allohex$p,
+         method = 'color', 
+         type = 'lower',
+         sig.level = 0.05,
+         insig='blank',
+         addCoef.col ='black',
+         number.cex = 0.6,
+         tl.cex = 0.7,
+         cl.cex = 0.7,
+         tl.col = "black",
+         diag=TRUE)
+
+# allohex_hybrids
+Corr_allohex_hybrids <- cor(x = as.matrix(allohex_hybrids[ , 3:34]), method = "pearson", use = "pairwise.complete.obs") 
+print(Corr_allohex_hybrids)
+
+P_allohex_hybrids <- cor.mtest(allohex_hybrids[ , 3:34], conf.level = 0.95)
+
+corrplot(Corr_allohex_hybrids, 
+         p.mat = P_allohex_hybrids$p,
+         method = 'color', 
+         type = 'lower',
+         sig.level = 0.05,
+         insig='blank',
+         addCoef.col ='black',
+         number.cex = 0.6,
+         tl.cex = 0.7,
+         cl.cex = 0.7,
+         tl.col = "black",
+         diag=TRUE)
+
+# Res_B_napus
+Corr_Res_B_napus <- cor(x = as.matrix(Res_B_napus[ , 3:34]), method = "pearson", use = "pairwise.complete.obs") 
+print(Corr_Res_B_napus)
+
+P_Res_B_napus <- cor.mtest(Res_B_napus[ , 3:34], conf.level = 0.95)
+
+corrplot(Corr_Res_B_napus, 
+         p.mat = P_Res_B_napus$p,
+         method = 'color', 
+         type = 'lower',
+         sig.level = 0.05,
+         insig='blank',
+         addCoef.col ='black',
+         number.cex = 0.6,
+         tl.cex = 0.7,
+         cl.cex = 0.7,
+         tl.col = "black",
+         diag=TRUE)
+
+plot.new()
+dev.off()
+
+# Natural_B_napus # didn't work
+Corr_Natural_B_napus <- cor(x = as.matrix(Natural_B_napus[ , 3:34]), method = "pearson", use = "pairwise.complete.obs") 
+print(Corr_Natural_B_napus)
+
+P_Natural_B_napus <- cor.mtest(Natural_B_napus[ , 3:34], conf.level = 0.95)
+
+corrplot(Corr_Natural_B_napus, 
+         p.mat = P_Natural_B_napus$p,
+         method = 'color', 
+         type = 'lower',
+         sig.level = 0.05,
+         insig='blank',
+         addCoef.col ='black',
+         number.cex = 0.6,
+         tl.cex = 0.7,
+         cl.cex = 0.7,
+         tl.col = "black",
+         diag=TRUE)
+
+
+# B_rapa
+Corr_B_rapa <- cor(x = as.matrix(B_rapa[ , 3:34]), method = "pearson", use = "pairwise.complete.obs") 
+print(Corr_B_rapa)
+
+P_B_rapa <- cor.mtest(B_rapa[ , 3:34], conf.level = 0.95)
+
+corrplot(Corr_B_rapa, 
+         p.mat = P_B_rapa$p,
+         method = 'color', 
+         type = 'lower',
+         sig.level = 0.05,
+         insig='blank',
+         addCoef.col ='black',
+         number.cex = 0.6,
+         tl.cex = 0.7,
+         cl.cex = 0.7,
+         tl.col = "black",
+         diag=TRUE)
+
+
+# B_oleracea
+Corr_B_oleracea <- cor(x = as.matrix(B_oleracea[ , 3:34]), method = "pearson", use = "pairwise.complete.obs") 
+print(Corr_B_oleracea)
+
+P_B_oleracea <- cor.mtest(B_oleracea[ , 3:34], conf.level = 0.95)
+
+corrplot(Corr_B_oleracea, 
+         p.mat = P_B_oleracea$p,
+         method = 'color', 
+         type = 'lower',
+         sig.level = 0.05,
+         insig='blank',
+         addCoef.col ='black',
+         number.cex = 0.6,
+         tl.cex = 0.7,
+         cl.cex = 0.7,
+         tl.col = "black",
+         diag=TRUE)
+
+
+# B_juncea
+Corr_B_juncea <- cor(x = as.matrix(B_juncea[ , 3:34]), method = "pearson", use = "pairwise.complete.obs") 
+print(Corr_B_juncea)
+
+P_B_juncea <- cor.mtest(B_juncea[ , 3:34], conf.level = 0.95)
+
+corrplot(Corr_B_juncea, 
+         p.mat = P_B_juncea$p,
+         method = 'color', 
+         type = 'lower',
+         sig.level = 0.05,
+         insig='blank',
+         addCoef.col ='black',
+         number.cex = 0.6,
+         tl.cex = 0.7,
+         cl.cex = 0.7,
+         tl.col = "black",
+         diag=TRUE)
+
+
+# B_carinata
+Corr_B_carinata <- cor(x = as.matrix(B_carinata[ , 3:34]), method = "pearson", use = "pairwise.complete.obs") 
+print(Corr_B_carinata)
+
+P_B_carinata <- cor.mtest(B_carinata[ , 3:34], conf.level = 0.95)
+
+corrplot(Corr_B_carinata, 
+         p.mat = P_B_carinata$p,
+         method = 'color', 
+         type = 'lower',
+         sig.level = 0.05,
+         insig='blank',
+         addCoef.col ='black',
+         number.cex = 0.6,
+         tl.cex = 0.7,
+         cl.cex = 0.7,
+         tl.col = "black",
+         diag=TRUE)
+
+
+# JC_hybrid
+Corr_JC_hybrid <- cor(x = as.matrix(JC_hybrid[ , 3:34]), method = "pearson", use = "pairwise.complete.obs") 
+print(Corr_JC_hybrid)
+
+P_JC_hybrid <- cor.mtest(JC_hybrid[ , 3:34], conf.level = 0.95)
+
+corrplot(Corr_JC_hybrid, 
+         p.mat = P_JC_hybrid$p,
+         method = 'color', 
+         type = 'lower',
+         sig.level = 0.05,
+         insig='blank',
+         addCoef.col ='black',
+         number.cex = 0.6,
+         tl.cex = 0.7,
+         cl.cex = 0.7,
+         tl.col = "black",
+         diag=TRUE)
+
