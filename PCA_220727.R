@@ -22,21 +22,25 @@ View(DATA)
 install.packages("factoextra")
 library(factoextra)
 
-
-# Compute PCA
+#recode first column as row names ##
+remove_rownames(DATA) %>% has_rownames()
+DATA_PCA <- column_to_rownames(DATA, var = "Genotype")
+View(DATA_PCA)
+#
+rownames(DATA) <- DATA[,1]
+DATA[,1] <- NULL
 str(DATA)
-DATA$Genotype <- as.factor(DATA$Genotype)
-typeof(DATA$Genotype)
-
-#recode first column as row names
+#
 DATA2 <- DATA[,-1]
 rownames(DATA2) <- DATA[,1]
 View(DATA2)
+# Geht nicht, offenbar weil nicht mehrere Zeilen denselben Namen haben dürfen##
 
-# Compute PCA - with rownames instead of factor column
+
+# Compute PCA - with rownames instead of factor column ### nachSTHDA ###
 # na.omit only works, if you apply it directly to the dataframe
-PCA_results <- prcomp(na.omit(DATA2), center = TRUE, scale = TRUE) #Was macht scale = TRUE nochmal?
-PCA_results2 <- prcomp(na.omit(DATA2), scale = TRUE)                                                                                #Was macht center = TRUE nochmal?
+PCA_results <- prcomp(na.omit(DATA2), center = TRUE, scale = TRUE) 
+print(PCA_results)                                                                             
 
 # Visualize eigenvalues (scree plot). Show the percentage of variances 
 # explained by each principal component.
@@ -44,4 +48,30 @@ fviz_eig(PCA_results)
 
 
 # Graph of individuals. Individuals with a similar profile are grouped together.
-fviz_pca_ind(PCA_results2)
+fviz_pca_ind(PCA_results)
+
+
+##Nach Hefin Rhys############################################################
+PCA_results <- prcomp(na.omit(DATA[ ,-1]), center = TRUE, scale = TRUE)
+PCA_results
+
+summary(PCA_results)
+
+biplot(PCA_results)
+
+str(PCA_results)
+head(PCA_results)
+tail(PCA_results)
+
+View(PCA_results)
+PCA_results
+PCA_results$x 
+
+DATA_pca <- cbind(DATA[ ,-1], PCA_results$x[,1:2])
+DATA_pca
+
+library(ggplot2)
+
+ggplot(iris2, aes(PC1, PC2, col = Species, fill = Species)) +
+  stat_ellipse(geom = "polygon", col = "black", alpha = 0.5) +
+  geom_point(shape = 21, col = "black")
