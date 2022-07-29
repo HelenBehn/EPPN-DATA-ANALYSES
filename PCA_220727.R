@@ -125,6 +125,9 @@ ggplot(DATA_pca2, aes(PC1, PC2, col = Genotype, fill = Genotype)) +
   stat_ellipse(geom = "polygon", col = "black", alpha = 0.5) +
   geom_point(shape = 21, col = "black")
 
+#ohne elipse
+ggplot(DATA_pca2, aes(PC1, PC2, col = Genotype, fill = Genotype)) +
+    geom_point(shape = 21, col = "black")
 
 #Plot by Accession ##################################################################
 #cbind ## mit na.omit geht's, weil Objekte dann die gleiche Anzahl Zeilen haben
@@ -164,6 +167,8 @@ library("factoextra")
 #1. get_eigenvalue
 eig.val <- get_eigenvalue(PCA_results)
 eig.val
+eig.val2 <- get_eig(PCA_results)
+eig.val2
 
 #2. fviz_eig erzeugt scree plot
 fviz_eig(PCA_results, addlabels = TRUE, ylim = c(0, 50))
@@ -219,6 +224,10 @@ grp <- as.factor(res.km$cluster)
 fviz_pca_var(PCA_results, col.var = grp, 
              palette = c("#0073C2FF", "#EFC000FF", "#868686FF"),
              legend.title = "Cluster")
+#
+fviz_pca_var(PCA_results, col.var = "contrib",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07")
+)
 
 # dimension description #geht nicht # inconvenient data
 res.desc <- dimdesc(PCA_results, axes = c(1,2), proba = 0.05)
