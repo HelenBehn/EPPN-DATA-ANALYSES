@@ -35,39 +35,7 @@ fviz_eig(PCA_results)
 # Graph of individuals. Individuals with a similar profile are grouped together.
 fviz_pca_ind(PCA_results)
 
-
-##Nach Hefin Rhys############################################################
-PCA_results <- prcomp(na.omit(DATA[ ,-1]), center = TRUE, scale = TRUE)
-PCA_results
-
-
-summary(PCA_results)
-
-biplot(PCA_results)
-
-str(PCA_results)
-head(PCA_results)
-tail(PCA_results)
-
-View(PCA_results)
-PCA_results
-PCA_results$x 
-
-#cbind geht nicht, weil unterschiedliche anzahl Zeilen in Objekten
-DATA_pca <- cbind(DATA[ ,-1], PCA_results$x[,1:2])
-DATA_pca
-
-library(ggplot2)
-
-ggplot(iris2, aes(PC1, PC2, col = Species, fill = Species)) +
-  stat_ellipse(geom = "polygon", col = "black", alpha = 0.5) +
-  geom_point(shape = 21, col = "black")
-
-
-
-##### https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html##
-install.packages("ggfortify")
-library(ggfortify)
+View(DATA)
 
 #create column giving accessions/lines
 DATA_accession <- DATA %>%
@@ -106,7 +74,8 @@ DATA_accession <- DATA %>%
     Genotype == "N6C2J2_PH35" ~ "novel allohexaploid",
     Genotype == "N1C1J1_PH36" ~ "novel allohexaploid",
     Genotype == "N1C1J1_PH39" ~ "novel allohexaploid",
-    Genotype == "N1C2J1_PH40" ~ "novel allohexaploid",
+    Genotype == "N1C2J1_PH40" ~ "novel allohexaploid", 
+    Genotype == "N5C2J1_PH42" ~ "novel allohexaploid", 
     Genotype == "N6C2J2_PH44" ~ "novel allohexaploid",
     Genotype == "N4C2J1_PH45" ~ "novel allohexaploid",
     Genotype == "N6C2J2_PH48" ~ "novel allohexaploid",
@@ -123,6 +92,58 @@ DATA_accession <- DATA %>%
     Genotype == "N6C2J2.N7C1J1" ~ "allohexaploid hybrid"
   ))
 View(DATA_accession)
+
+
+
+##Nach Hefin Rhys############################################################
+PCA_results <- prcomp(na.omit(DATA[ ,-1]), center = TRUE, scale = TRUE)
+PCA_results
+
+summary(PCA_results)
+
+biplot(PCA_results)
+
+#Check result
+str(PCA_results)
+
+# Check PCs
+PCA_results$x 
+
+#Zeilenzahl checken
+PCA_results$x     # 174 Zeilen
+DATA_accession    #370
+View(na.omit(DATA_accession))   #172 #jetzt 174, Problem war gelöscheter genotyp N5C2J1_PH42
+View(na.omit(DATA))             #174 INTERESSANT! DATA ud DATA_accession unterschiedlich viele zeilen!
+
+#Plot by Genotype ##################################################################
+#cbind ## mit na.omit geht's, weil Objekte dann die gleiche Anzahl Zeilen haben
+DATA_pca2 <- cbind(na.omit(DATA), PCA_results$x[,1:2]) 
+View(DATA_pca2)
+
+library(ggplot2)
+
+ggplot(DATA_pca2, aes(PC1, PC2, col = Genotype, fill = Genotype)) +
+  stat_ellipse(geom = "polygon", col = "black", alpha = 0.5) +
+  geom_point(shape = 21, col = "black")
+
+
+#Plot by Accession ##################################################################
+#cbind ## mit na.omit geht's, weil Objekte dann die gleiche Anzahl Zeilen haben
+DATA_pca2 <- cbind(na.omit(DATA), PCA_results$x[,1:2]) 
+View(DATA_pca2)
+
+library(ggplot2)
+
+ggplot(DATA_pca2, aes(PC1, PC2, col = Genotype, fill = Genotype)) +
+  stat_ellipse(geom = "polygon", col = "black", alpha = 0.5) +
+  geom_point(shape = 21, col = "black")
+
+
+
+##### https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html##
+install.packages("ggfortify")
+library(ggfortify)
+
 
 #rownames
 remove_rownames(DATA_accession) %>% has_rownames()
