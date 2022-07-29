@@ -120,8 +120,6 @@ View(na.omit(DATA))             #174 INTERESSANT! DATA ud DATA_accession untersc
 DATA_pca2 <- cbind(na.omit(DATA), PCA_results$x[,1:2]) 
 View(DATA_pca2)
 
-library(ggplot2)
-
 ggplot(DATA_pca2, aes(PC1, PC2, col = Genotype, fill = Genotype)) +
   stat_ellipse(geom = "polygon", col = "black", alpha = 0.5) +
   geom_point(shape = 21, col = "black")
@@ -129,37 +127,13 @@ ggplot(DATA_pca2, aes(PC1, PC2, col = Genotype, fill = Genotype)) +
 
 #Plot by Accession ##################################################################
 #cbind ## mit na.omit geht's, weil Objekte dann die gleiche Anzahl Zeilen haben
-DATA_pca2 <- cbind(na.omit(DATA), PCA_results$x[,1:2]) 
+DATA_pca2 <- cbind(na.omit(DATA_accession), PCA_results$x[,1:2]) 
 View(DATA_pca2)
 
-library(ggplot2)
-
-ggplot(DATA_pca2, aes(PC1, PC2, col = Genotype, fill = Genotype)) +
+ggplot(DATA_pca2, aes(PC1, PC2, col = Accession, fill = Accession)) +
   stat_ellipse(geom = "polygon", col = "black", alpha = 0.5) +
   geom_point(shape = 21, col = "black")
 
+ggplot(DATA_pca2, aes(PC1, PC2, col = Accession, fill = Accession)) +
+  geom_point(shape = 21, col = "black")
 
-
-##### https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html##
-install.packages("ggfortify")
-library(ggfortify)
-
-
-#rownames
-remove_rownames(DATA_accession) %>% has_rownames()
-column_to_rownames(DATA_accession, var = "Accession")
-rownames(DATA_accession)
-
-#plot PCA
-autoplot(PCA_results)
-autoplot(PCA_results, data = DATA_accession, colour = 'Accession')
-autoplot(PCA_results, data = DATA_accession[,2:33], colour = 'Accession')
-
-autoplot(PCA_results, data = na.omit(DATA_accession[,2:33]), colour = 'Accession')
-autoplot(PCA_results, data = na.omit(DATA_accession[,2:33]))
-
-autoplot(prcomp(na.omit(DATA[ ,-1]), center = TRUE, scale = TRUE), data = na.omit(DATA_accession), colour = 'Accession')
-
-
-View(na.omit(DATA_accession))
-View(PCA_results$x)
