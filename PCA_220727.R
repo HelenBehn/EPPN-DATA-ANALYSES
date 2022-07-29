@@ -107,7 +107,8 @@ biplot(PCA_results)
 str(PCA_results)
 
 # Check PCs
-PCA_results$x 
+PCA_results$x
+PCA_results$rotation
 
 #Zeilenzahl checken
 PCA_results$x     # 174 Zeilen
@@ -137,3 +138,96 @@ ggplot(DATA_pca2, aes(PC1, PC2, col = Accession, fill = Accession)) +
 ggplot(DATA_pca2, aes(PC1, PC2, col = Accession, fill = Accession)) +
   geom_point(shape = 21, col = "black")
 
+# correlation PCs and Trait Variables###
+cor(na.omit(DATA[,-1]), na.omit(DATA_pca2[,35:36]))
+
+
+
+
+#Da ich mehr als 2 relevant PCs habe und abbilden möchte, hier ein Versuch nach STHDA####
+#http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/
+
+#Install the two packages as follow:
+install.packages(c("FactoMineR", "factoextra"))
+
+#Load them in R, by typing this:
+library("FactoMineR")
+library("factoextra")
+
+#functions in factoextra
+#1. get_eigenvalue(res.pca): Extract the eigenvalues/variances of principal components
+#2. fviz_eig(res.pca): Visualize the eigenvalues
+#3. get_pca_ind(res.pca), get_pca_var(res.pca): Extract the results for individuals and variables, respectively.
+#4. fviz_pca_ind(res.pca), fviz_pca_var(res.pca): Visualize the results individuals and variables, respectively.
+#5. fviz_pca_biplot(res.pca): Make a biplot of individuals and variables.
+
+#1. get_eigenvalue
+eig.val <- get_eigenvalue(PCA_results)
+eig.val
+
+#2. fviz_eig erzeugt scree plot
+fviz_eig(PCA_results, addlabels = TRUE, ylim = c(0, 50))
+
+#3. get_pca_ind
+var <- get_pca_var(PCA_results)
+var
+var$cos2
+
+# correlation circle
+# Coordinates of variables
+head(var$coord, 4)
+
+#plot variables
+fviz_pca_var(PCA_results, col.var = "black", repel = TRUE)
+
+#quality of representation
+head(var$cos2, 4)
+
+#You can visualize the cos2 of variables on all the dimensions using the corrplot package:
+library("corrplot")
+corrplot(var$cos2, is.corr=FALSE)
+
+# Total cos2 of variables on Dim.1 and Dim.2
+fviz_cos2(PCA_results, choice = "var", axes = 1:2)
+
+# Color by cos2 values: quality on the factor map
+fviz_pca_var(PCA_results, 
+             col.var = "cos2",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             repel = TRUE
+)
+
+#Contributions of variables to PCs
+#The larger the value of the contribution, the more the variable contributes to the component
+head(var$contrib, 4)
+corrplot(var$contrib, is.corr=FALSE) 
+
+# Contributions of variables to PC1
+fviz_contrib(PCA_results, choice = "var", axes = 1, top = 10)
+# Contributions of variables to PC2
+fviz_contrib(PCA_results, choice = "var", axes = 2, top = 10)
+# The total contribution to PC1 and PC2 is obtained with the following R code:
+fviz_contrib(PCA_results, choice = "var", axes = 1:2, top = 10)
+
+#colour by group
+# Create a grouping variable using kmeans
+# Create 3 groups of variables (centers = 3)
+set.seed(123)
+res.km <- kmeans(var$coord, centers = 3, nstart = 25)
+grp <- as.factor(res.km$cluster)
+# Color variables by groups
+fviz_pca_var(PCA_results, col.var = grp, 
+             palette = c("#0073C2FF", "#EFC000FF", "#868686FF"),
+             legend.title = "Cluster")
+
+# dimension description #geht nicht # inconvenient data
+res.desc <- dimdesc(PCA_results, axes = c(1,2), proba = 0.05)
+# Description of dimension 1
+res.desc$Dim.1
+
+#Biplot
+#To make a simple biplot of individuals and variables, type this:
+fviz_pca_biplot(PCA_results, repel = TRUE,
+                  col.var = "#2E9FDF", # Variables color
+                  col.ind = "#696969"  # Individuals color
+  )
