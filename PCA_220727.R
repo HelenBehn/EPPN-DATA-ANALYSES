@@ -3,6 +3,7 @@ library(tidyverse)
 library(dplyr)
 library(ggplot2)
 library(readr)
+library(factoextra)
 
 # vollständige Rohdatentabelle laden ##########################################
 #Im Projekt EPPN-DATA-ANALYSES ist dies das wd. Kann nicht geändert werden. 
@@ -18,9 +19,6 @@ View(DATA)
 
 #PCA - first attempts ##########################################################
 # Quelle: http://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/118-principal-component-analysis-in-r-prcomp-vs-princomp/
-# Load factoextra for visualization
-install.packages("factoextra")
-library(factoextra)
 
 # Compute PCA - with rownames instead of factor column ### nachSTHDA ###
 # na.omit only works, if you apply it directly to the dataframe
@@ -240,3 +238,15 @@ fviz_pca_biplot(PCA_results, repel = TRUE,
                   col.var = "#2E9FDF", # Variables color
                   col.ind = "#696969"  # Individuals color
   )
+
+
+
+#NEU 28.08.22 ## with trait arrows and elipses ################################
+# Change the color by groups, add ellipses
+fviz_pca_biplot(PCA_results, label="var", 
+                ggtheme = theme_gray(), 
+                col.var = "black", 
+                habillage=DATA_pca2$Accession,
+                addEllipses=TRUE, 
+                ellipse.level=0.95,
+                max.overlaps = 0.1)
