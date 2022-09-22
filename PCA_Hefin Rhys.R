@@ -1,6 +1,7 @@
 data(iris)
 head(iris)
 ?prcomp
+View(iris)
 
 myPr <- prcomp(iris[, -5])
 myPr <- prcomp(iris[, -5], scale = TRUE)

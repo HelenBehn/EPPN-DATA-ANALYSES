@@ -121,7 +121,7 @@ ggplot(comp_1X, aes(Genotype, plant_height, fill = Generation, color = Generatio
   coord_flip() +
   theme(axis.title = element_text(size = 14),
         legend.text = element_text(size = 8),
-        legend.title = element_text(size = 10),
+        legend.title= element_blank(),
         axis.title.x = element_text(size = 10),
         axis.title.y = element_text(size = 10),
         axis.text.x = element_text(size = 6),
