@@ -57,37 +57,37 @@ DATA_accession <- DATA %>%
     Genotype == "J2" ~ "B. juncea",
     Genotype == "J3" ~ "B. juncea",
     
-    Genotype == "J1C1" ~ "JC hybrid",
-    Genotype == "J1C2" ~ "JC hybrid",
-    Genotype == "O1J3_PH29" ~ "novel allohexaploid",
-    Genotype == "O1J3_PH47" ~ "novel allohexaploid",
-    Genotype == "N5C2J1_PH22" ~ "novel allohexaploid",
-    Genotype == "N5C2J2_PH23" ~ "novel allohexaploid",
-    Genotype == "N6C2J2_PH24" ~ "novel allohexaploid",
-    Genotype == "N1C1J1_PH25" ~ "novel allohexaploid",
-    Genotype == "N1C2J1_PH26" ~ "novel allohexaploid",
-    Genotype == "N4C2J1_PH27" ~ "novel allohexaploid",
-    Genotype == "N5C2J2_PH30" ~ "novel allohexaploid",
-    Genotype == "N1C1J1_PH31" ~ "novel allohexaploid",
-    Genotype == "N6C2J2_PH35" ~ "novel allohexaploid",
-    Genotype == "N1C1J1_PH36" ~ "novel allohexaploid",
-    Genotype == "N1C1J1_PH39" ~ "novel allohexaploid",
-    Genotype == "N1C2J1_PH40" ~ "novel allohexaploid", 
-    Genotype == "N5C2J1_PH42" ~ "novel allohexaploid", 
-    Genotype == "N6C2J2_PH44" ~ "novel allohexaploid",
-    Genotype == "N4C2J1_PH45" ~ "novel allohexaploid",
-    Genotype == "N6C2J2_PH48" ~ "novel allohexaploid",
-    Genotype == "N7C1J1" ~ "novel allohexaploid",
+    Genotype == "J1C1" ~ "JC hybrids",
+    Genotype == "J1C2" ~ "JC hybrids",
+    Genotype == "O1J3_PH29" ~ "Inbred NCJ allohexaploids",
+    Genotype == "O1J3_PH47" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N5C2J1_PH22" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N5C2J2_PH23" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N6C2J2_PH24" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N1C1J1_PH25" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N1C2J1_PH26" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N4C2J1_PH27" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N5C2J2_PH30" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N1C1J1_PH31" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N6C2J2_PH35" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N1C1J1_PH36" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N1C1J1_PH39" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N1C2J1_PH40" ~ "Inbred NCJ allohexaploids", 
+    Genotype == "N5C2J1_PH42" ~ "Inbred NCJ allohexaploids", 
+    Genotype == "N6C2J2_PH44" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N4C2J1_PH45" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N6C2J2_PH48" ~ "Inbred NCJ allohexaploids",
+    Genotype == "N7C1J1" ~ "Inbred NCJ allohexaploids",
     
-    Genotype == "N1C1J1.N5C2J2" ~ "allohexaploid hybrid",
-    Genotype == "N1C1J1.N1C2J1" ~ "allohexaploid hybrid",
-    Genotype == "N5C2J2.N7C1J1" ~ "allohexaploid hybrid",
-    Genotype == "N5C2J2.N5C2J2" ~ "allohexaploid hybrid",
-    Genotype == "N1C1J1. N6C2J2" ~ "allohexaploid hybrid",
-    Genotype == "N5C2J2.N6C2J2" ~ "allohexaploid hybrid",
-    Genotype == "N6C2J2.O1J3" ~ "allohexaploid hybrid",
-    Genotype == "N6C2J2.N4C2J1" ~ "allohexaploid hybrid",
-    Genotype == "N6C2J2.N7C1J1" ~ "allohexaploid hybrid"
+    Genotype == "N1C1J1.N5C2J2" ~ "F1 allohexaploid hybrids",
+    Genotype == "N1C1J1.N1C2J1" ~ "F1 allohexaploid hybrids",
+    Genotype == "N5C2J2.N7C1J1" ~ "F1 allohexaploid hybrids",
+    Genotype == "N5C2J2.N5C2J2" ~ "F1 allohexaploid hybrids",
+    Genotype == "N1C1J1. N6C2J2" ~ "F1 allohexaploid hybrids",
+    Genotype == "N5C2J2.N6C2J2" ~ "F1 allohexaploid hybrids",
+    Genotype == "N6C2J2.O1J3" ~ "F1 allohexaploid hybrids",
+    Genotype == "N6C2J2.N4C2J1" ~ "F1 allohexaploid hybrids",
+    Genotype == "N6C2J2.N7C1J1" ~ "F1 allohexaploid hybrids"
   ))
 View(DATA_accession)
 
@@ -237,12 +237,13 @@ res.desc$Dim.1
 fviz_pca_biplot(PCA_results, repel = TRUE,
                   col.var = "#2E9FDF", # Variables color
                   col.ind = "#696969"  # Individuals color
-  )
+                )
 
 
 
 #NEU 28.08.22 ## with trait arrows and elipses ################################
 # Change the color by groups, add ellipses
+head(PCA_results)
 fviz_pca_biplot(PCA_results, label="var", 
                 ggtheme = theme_gray(), 
                 col.var = "black", 
