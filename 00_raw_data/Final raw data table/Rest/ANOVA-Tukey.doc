@@ -1,0 +1,510 @@
+[1] "plant_height"
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2  41500   20750   133.9 1.11e-12 ***
+Residuals   21   3253     155                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+          diff      lwr       upr   p adj
+R2-O4    41.00 25.31319  56.68681 4.6e-06
+R204-O4 101.25 85.56319 116.93681 0.0e+00
+R204-R2  60.25 44.56319  75.93681 0.0e+00
+
+[1] "branch_number"
+            Df Sum Sq Mean Sq F value  Pr(>F)    
+Genotype     2 174.08   87.04   168.1 1.2e-13 ***
+Residuals   21  10.87    0.52                    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+          diff      lwr        upr     p adj
+R2-O4    5.375  4.46807  6.2819301 0.0000000
+R204-O4 -0.625 -1.53193  0.2819301 0.2152748
+R204-R2 -6.000 -6.90693 -5.0930699 0.0000000
+
+[1] "pod_weight_plant"
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2   1077   538.5   35.23 1.95e-07 ***
+Residuals   21    321    15.3                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+            diff        lwr       upr     p adj
+R2-O4    14.9375  10.010266 19.864734 0.0000005
+R204-O4   1.5875  -3.339734  6.514734 0.6998166
+R204-R2 -13.3500 -18.277234 -8.422766 0.0000027
+
+[1] "main"
+            Df Sum Sq Mean Sq F value Pr(>F)
+Genotype     2    663   331.4   0.924  0.428
+Residuals   10   3588   358.8               
+11 observations deleted due to missingness
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+         diff       lwr      upr     p adj
+R2-O4    2.05 -32.78425 36.88425 0.9857748
+R204-O4 16.50 -20.21852 53.21852 0.4624369
+R204-R2 14.45 -20.38425 49.28425 0.5144218
+
+[1] "pods_plant"
+            Df Sum Sq Mean Sq F value Pr(>F)  
+Genotype     2  10982    5491   4.225 0.0468 *
+Residuals   10  12998    1300                 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+11 observations deleted due to missingness
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+          diff        lwr        upr     p adj
+R2-O4   -68.05 -134.34875  -1.751252 0.0444085
+R204-O4 -22.00  -91.88502  47.885017 0.6743952
+R204-R2  46.05  -20.24875 112.348748 0.1877714
+
+[1] "pods_branch"
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2   3295  1647.3   19.93 0.000325 ***
+Residuals   10    827    82.7                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+11 observations deleted due to missingness
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+          diff       lwr       upr     p adj
+R2-O4   -34.35 -51.06999 -17.63001 0.0005784
+R204-O4  -3.50 -21.12442  14.12442 0.8515783
+R204-R2  30.85  14.13001  47.56999 0.0012990
+
+[1] "weight_pod"
+            Df  Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2 0.04335 0.02167     114 1.31e-07 ***
+Residuals   10 0.00190 0.00019                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+11 observations deleted due to missingness
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+               diff          lwr         upr     p adj
+R2-O4    0.12643511  0.101079056  0.15179115 0.0000002
+R204-O4  0.01709446 -0.009633161  0.04382209 0.2340174
+R204-R2 -0.10934064 -0.134696692 -0.08398459 0.0000009
+
+[1] "first_flowers_DAS"
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2 271.58   135.8    59.1 2.37e-09 ***
+Residuals   21  48.25     2.3                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+          diff         lwr       upr     p adj
+R2-O4   -8.125 -10.0353275 -6.214673 0.0000000
+R204-O4 -5.250  -7.1603275 -3.339673 0.0000022
+R204-R2  2.875   0.9646725  4.785327 0.0029280
+
+[1] "peak_flowers_DAS"
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2 1107.7   553.9     238 3.73e-15 ***
+Residuals   21   48.9     2.3                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+           diff       lwr       upr p adj
+R2-O4   -16.500 -18.42266 -14.57734 0e+00
+R204-O4 -10.125 -12.04766  -8.20234 0e+00
+R204-R2   6.375   4.45234   8.29766 1e-07
+
+[1] "flowering_days_to_peak"
+            Df Sum Sq Mean Sq F value  Pr(>F)    
+Genotype     2 283.08   141.5   78.48 1.8e-10 ***
+Residuals   21  37.88     1.8                    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+          diff        lwr       upr     p adj
+R2-O4   -8.375 -10.067527 -6.682473 0.0000000
+R204-O4 -4.875  -6.567527 -3.182473 0.0000011
+R204-R2  3.500   1.807473  5.192527 0.0001039
+
+[1] "total_flowering_days"
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2 2335.1  1167.5   58.07 2.78e-09 ***
+Residuals   21  422.2    20.1                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+           diff         lwr       upr     p adj
+R2-O4   -17.625 -23.2762431 -11.97376 0.0000003
+R204-O4   5.500  -0.1512431  11.15124 0.0573746
+R204-R2  23.125  17.4737569  28.77624 0.0000000
+
+[1] "pixel.day_peak"
+            Df    Sum Sq   Mean Sq F value   Pr(>F)    
+Genotype     2 895503853 447751926    40.8 5.84e-08 ***
+Residuals   21 230463057  10974431                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+             diff        lwr       upr     p adj
+R2-O4   -11503.87 -15678.907 -7328.843 0.0000021
+R204-O4   2533.75  -1641.282  6708.782 0.2977803
+R204-R2  14037.62   9862.593 18212.657 0.0000001
+
+[1] "pixel.days_to_peak"
+            Df    Sum Sq   Mean Sq F value   Pr(>F)    
+Genotype     2 1.640e+11 8.201e+10   93.63 3.45e-11 ***
+Residuals   21 1.839e+10 8.759e+08                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+              diff       lwr          upr     p adj
+R2-O4   -191119.12 -228417.1 -153821.1521 0.0000000
+R204-O4  -37603.12  -74901.1    -305.1521 0.0479232
+R204-R2  153516.00  116218.0  190813.9729 0.0000000
+
+[1] "total_pixel.days"
+            Df    Sum Sq   Mean Sq F value  Pr(>F)    
+Genotype     2 6.845e+11 3.422e+11     118 3.8e-12 ***
+Residuals   21 6.092e+10 2.901e+09                    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+             diff        lwr       upr     p adj
+R2-O4   -293356.2 -361237.89 -225474.6 0.0000000
+R204-O4  105892.1   38010.49  173773.8 0.0021156
+R204-R2  399248.4  331366.74  467130.0 0.0000000
+
+[1] "mean_pixel.days_to_peak"
+            Df    Sum Sq   Mean Sq F value   Pr(>F)    
+Genotype     2 311008447 155504223   63.58 1.23e-09 ***
+Residuals   21  51358847   2445659                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+             diff        lwr       upr     p adj
+R2-O4   -6918.782 -8889.6924 -4947.872 0.0000000
+R204-O4  1274.732  -696.1781  3245.642 0.2553996
+R204-R2  8193.514  6222.6043 10164.424 0.0000000
+
+[1] "R01_raceme_start"
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2  603.5  301.75   198.8 2.26e-14 ***
+Residuals   21   31.9    1.52                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+              diff        lwr        upr    p adj
+R2-O4   -11.915224 -13.468032 -10.362417 0.00e+00
+R204-O4  -8.541871 -10.094678  -6.989063 0.00e+00
+R204-R2   3.373354   1.820546   4.926161 5.64e-05
+
+[1] "R02_mean_rate"
+            Df Sum Sq Mean Sq F value Pr(>F)    
+Genotype     2   7268    3634   838.9 <2e-16 ***
+Residuals   21     91       4                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+             diff       lwr       upr p adj
+R2-O4    42.35087  39.72781  44.97393     0
+R204-O4  25.36185  22.73879  27.98491     0
+R204-R2 -16.98902 -19.61208 -14.36596     0
+
+[1] "R03_max_rate"
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2  15840    7920     101 1.69e-11 ***
+Residuals   21   1647      78                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+             diff       lwr       upr     p adj
+R2-O4   57.683262  46.52075 68.845771 0.0000000
+R204-O4 50.625745  39.46324 61.788254 0.0000000
+R204-R2 -7.057517 -18.22003  4.104992 0.2703099
+
+[1] "R04_DAS_of_max_rate"
+            Df Sum Sq Mean Sq F value  Pr(>F)    
+Genotype     2  449.5  224.75   151.6 3.3e-13 ***
+Residuals   21   31.1    1.48                    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+              diff        lwr       upr    p adj
+R2-O4   -10.415583 -11.949930 -8.881236 0.00e+00
+R204-O4  -6.916539  -8.450887 -5.382192 0.00e+00
+R204-R2   3.499044   1.964696  5.033391 3.02e-05
+
+[1] "R05_main_ext_period"
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2  998.6   499.3   200.4 2.08e-14 ***
+Residuals   21   52.3     2.5                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+             diff       lwr       upr p adj
+R2-O4   -7.358364 -9.347405 -5.369323     0
+R204-O4  8.429541  6.440500 10.418582     0
+R204-R2 15.787905 13.798864 17.776946     0
+
+[1] "R06_50ht_period"
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2 162.78   81.39   94.67 3.11e-11 ***
+Residuals   21  18.05    0.86                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+             diff       lwr        upr     p adj
+R2-O4   -1.887866 -3.056421 -0.7193112 0.0015212
+R204-O4  4.333246  3.164691  5.5018006 0.0000000
+R204-R2  6.221112  5.052557  7.3896669 0.0000000
+
+[1] "R07_75ht_period"
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2  503.3  251.64   84.61 8.93e-11 ***
+Residuals   21   62.5    2.97                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+             diff       lwr       upr   p adj
+R2-O4   -5.701320 -7.874752 -3.527887 4.4e-06
+R204-O4  5.515151  3.341718  7.688583 7.0e-06
+R204-R2 11.216471  9.043038 13.389903 0.0e+00
+
+[1] "R08_50ht_rate"
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2   9815    4908   298.2 3.83e-16 ***
+Residuals   21    346      16                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+             diff       lwr      upr   p adj
+R2-O4    48.31194  43.19881 53.42507 0.0e+00
+R204-O4  33.63556  28.52243 38.74869 0.0e+00
+R204-R2 -14.67638 -19.78951 -9.56325 1.2e-06
+
+[1] "R09_75ht_rate"
+            Df Sum Sq Mean Sq F value Pr(>F)    
+Genotype     2   9665    4833   572.4 <2e-16 ***
+Residuals   21    177       8                   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+             diff       lwr       upr p adj
+R2-O4    48.58517  44.92338  52.24696     0
+R204-O4  30.76018  27.09839  34.42197     0
+R204-R2 -17.82499 -21.48678 -14.16320     0
+
+[1] "R10_max_height"
+            Df  Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2 3735139 1867569   247.4 2.53e-15 ***
+Residuals   21  158539    7549                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+           diff      lwr       upr p adj
+R2-O4   373.875 264.3716  483.3784 1e-07
+R204-O4 958.625 849.1216 1068.1284 0e+00
+R204-R2 584.750 475.2466  694.2534 0e+00
+
+[1] "R11_max_height_DAS"
+            Df Sum Sq Mean Sq F value Pr(>F)  
+Genotype     2   1058   529.2   4.986 0.0169 *
+Residuals   21   2229   106.1                 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+              diff        lwr      upr     p adj
+R2-O4   -14.035033 -27.018327 -1.05174 0.0326219
+R204-O4   0.102555 -12.880739 13.08585 0.9997815
+R204-R2  14.137588   1.154295 27.12088 0.0312668
+
+[1] "R12_extension_days_to_max"
+            Df Sum Sq Mean Sq F value Pr(>F)
+Genotype     2  520.2   260.1   2.352   0.12
+Residuals   21 2322.8   110.6               
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+             diff        lwr      upr     p adj
+R2-O4   -2.119809 -15.374373 11.13475 0.9146816
+R204-O4  8.644426  -4.610138 21.89899 0.2499948
+R204-R2 10.764235  -2.490329 24.01880 0.1257114
+
+[1] "seed.wt_10p_g"
+            Df    Sum Sq   Mean Sq F value   Pr(>F)    
+Genotype     2 377826558 188913279   128.7 1.64e-12 ***
+Residuals   21  30834746   1468321                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+             diff        lwr       upr     p adj
+R2-O4    9166.375  7639.2333 10693.517 0.0000000
+R204-O4  1785.750   258.6083  3312.892 0.0201563
+R204-R2 -7380.625 -8907.7667 -5853.483 0.0000000
+
+[1] "seeds_per_pod"
+            Df Sum Sq Mean Sq F value  Pr(>F)    
+Genotype     2 1057.6   528.8   123.7 2.4e-12 ***
+Residuals   21   89.7     4.3                    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+           diff        lwr        upr p adj
+R2-O4     7.625   5.019588  10.230412 9e-07
+R204-O4  -8.625 -11.230412  -6.019588 1e-07
+R204-R2 -16.250 -18.855412 -13.644588 0e+00
+
+[1] "TGW_g"
+            Df Sum Sq Mean Sq F value   Pr(>F)    
+Genotype     2  69.70   34.85   66.85 7.82e-10 ***
+Residuals   21  10.95    0.52                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c1A[, i] ~ Genotype, data = c1A)
+
+$Genotype
+          diff       lwr      upr     p adj
+R2-O4   2.9775 2.0675576 3.887442 0.0000001
+R204-O4 4.0225 3.1125576 4.932442 0.0000000
+R204-R2 1.0450 0.1350576 1.954942 0.0226204
+

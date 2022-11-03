@@ -1,0 +1,192 @@
+[1] "plant_height"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "branch_number"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "pod_weight_plant"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "main"
+               Pr(>F)    
+Genotype    0.0004699 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "pods_plant"
+               Pr(>F)    
+Genotype    9.201e-15 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "pods_branch"
+               Pr(>F)    
+Genotype    1.542e-12 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "weight_pod"
+               Pr(>F)    
+Genotype    9.686e-14 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "first_flowers_DAS"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "peak_flowers_DAS"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "flowering_days_to_peak"
+               Pr(>F)    
+Genotype    1.621e-12 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "total_flowering_days"
+               Pr(>F)    
+Genotype    7.196e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "pixel.day_peak"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "pixel.days_to_peak"
+               Pr(>F)    
+Genotype    7.435e-13 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "total_pixel.days"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "mean_pixel.days_to_peak"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "R01_raceme_start"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "R02_mean_rate"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "R03_max_rate"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "R04_DAS_of_max_rate"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "R05_main_ext_period"
+               Pr(>F)    
+Genotype    3.997e-09 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "R06_50ht_period"
+               Pr(>F)    
+Genotype    2.574e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "R07_75ht_period"
+               Pr(>F)    
+Genotype    1.046e-08 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "R08_50ht_rate"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "R09_75ht_rate"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "R10_max_height"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "R11_max_height_DAS"
+               Pr(>F)    
+Genotype    7.453e-10 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "R12_extension_days_to_max"
+               Pr(>F)    
+Genotype    3.588e-08 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "seed wt_10p_g"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "seeds_per_pod"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "TGW_g"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "BBCH51"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "BBCH61"
+               Pr(>F)    
+Genotype    < 2.2e-16 ***
+Residuals                
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
